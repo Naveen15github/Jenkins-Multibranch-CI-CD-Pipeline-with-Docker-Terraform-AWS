@@ -18,17 +18,6 @@
 
 ---
 
-## 📸 Project Showcase
-
-### 🌐 Live Application — CI/CD Pipeline Dashboard
-
-The deployed application is a production-ready CI/CD Pipeline Dashboard, running on AWS EC2 and accessible via both the staging and production environments.
-
-![CI/CD Pipeline Dashboard Hero](Screenshots/Screenshot%20(630).png)
-*Production-ready landing page running live on AWS EC2 — Staging: http://3.213.252.204:3000*
-
----
-
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
