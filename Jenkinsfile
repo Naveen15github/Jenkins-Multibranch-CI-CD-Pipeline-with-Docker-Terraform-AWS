@@ -123,6 +123,75 @@ pipeline {
                         bash scripts/deploy.sh
                     """
                 }
+                
+                script {
+                    // Send deployment success notification
+                    def slackMessage = """
+                    {
+                        "blocks": [
+                            {
+                                "type": "header",
+                                "text": {
+                                    "type": "plain_text",
+                                    "text": "🚀 Deployed to Staging",
+                                    "emoji": true
+                                }
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Build:*\\n#${BUILD_NUMBER}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Image:*\\nnaveen152005/myapp:${BUILD_NUMBER}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Environment:*\\nStaging"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*URL:*\\nhttp://3.213.252.204:3000"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "actions",
+                                "elements": [
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "🌐 Open App"
+                                        },
+                                        "url": "http://3.213.252.204:3000",
+                                        "style": "primary"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "📊 View Build"
+                                        },
+                                        "url": "${env.BUILD_URL}"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    """
+                    
+                    withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'SLACK_URL')]) {
+                        sh """
+                            curl -s -X POST -H 'Content-type: application/json' \
+                            --data '${slackMessage}' \
+                            "\${SLACK_URL}"
+                        """
+                    }
+                }
             }
         }
 
@@ -143,6 +212,85 @@ pipeline {
                 branch 'main'
             }
             steps {
+                script {
+                    // Send Slack notification for approval request
+                    def buildUrl = env.BUILD_URL
+                    def buildNumber = env.BUILD_NUMBER
+                    
+                    def slackMessage = """
+                    {
+                        "blocks": [
+                            {
+                                "type": "header",
+                                "text": {
+                                    "type": "plain_text",
+                                    "text": "🚀 Production Deployment Approval Required",
+                                    "emoji": true
+                                }
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Build:*\\n#${buildNumber}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Docker Image:*\\nnaveen152005/myapp:${buildNumber}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Environment:*\\nProduction"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Server:*\\n34.194.214.144"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "⚠️ *This will deploy to production.* Please review and approve."
+                                }
+                            },
+                            {
+                                "type": "actions",
+                                "elements": [
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "✅ Approve in Jenkins"
+                                        },
+                                        "url": "${buildUrl}input",
+                                        "style": "primary"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "📊 View Build"
+                                        },
+                                        "url": "${buildUrl}"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    """
+                    
+                    withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'SLACK_URL')]) {
+                        sh """
+                            curl -s -X POST -H 'Content-type: application/json' \
+                            --data '${slackMessage}' \
+                            "\${SLACK_URL}"
+                        """
+                    }
+                }
+                
                 timeout(time: 30, unit: 'MINUTES') {
                     input message: "Deploy build #${BUILD_NUMBER} to PRODUCTION?",
                           ok: 'Yes, deploy to production',
@@ -171,6 +319,82 @@ pipeline {
                         APP_PORT=${APP_PORT} \
                         bash scripts/deploy.sh
                     """
+                }
+                
+                script {
+                    // Send production deployment success notification
+                    def slackMessage = """
+                    {
+                        "blocks": [
+                            {
+                                "type": "header",
+                                "text": {
+                                    "type": "plain_text",
+                                    "text": "✅ Deployed to Production",
+                                    "emoji": true
+                                }
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Build:*\\n#${BUILD_NUMBER}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Image:*\\nnaveen152005/myapp:${BUILD_NUMBER}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Environment:*\\n🔴 Production"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*URL:*\\nhttp://34.194.214.144:3000"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "🎉 *Production deployment successful!* The new version is now live."
+                                }
+                            },
+                            {
+                                "type": "actions",
+                                "elements": [
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "🌐 Open Production App"
+                                        },
+                                        "url": "http://34.194.214.144:3000",
+                                        "style": "primary"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "📊 View Build"
+                                        },
+                                        "url": "${env.BUILD_URL}"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    """
+                    
+                    withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'SLACK_URL')]) {
+                        sh """
+                            curl -s -X POST -H 'Content-type: application/json' \
+                            --data '${slackMessage}' \
+                            "\${SLACK_URL}"
+                        """
+                    }
                 }
             }
         }
@@ -217,12 +441,65 @@ pipeline {
         success {
             script {
                 def branch = env.BRANCH_NAME
-                def msg = "BUILD SUCCESS | Branch: ${branch} | Job: ${env.JOB_NAME} | Build: #${env.BUILD_NUMBER} | ${env.BUILD_URL}"
+                def buildUrl = env.BUILD_URL
+                def buildNumber = env.BUILD_NUMBER
+                def jobName = env.JOB_NAME
+                
+                def slackMessage = """
+                {
+                    "blocks": [
+                        {
+                            "type": "header",
+                            "text": {
+                                "type": "plain_text",
+                                "text": "✅ Build Successful",
+                                "emoji": true
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "fields": [
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Branch:*\\n${branch}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Build:*\\n#${buildNumber}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Job:*\\n${jobName}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Status:*\\n✅ Passed"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "actions",
+                            "elements": [
+                                {
+                                    "type": "button",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "View Build"
+                                    },
+                                    "url": "${buildUrl}",
+                                    "style": "primary"
+                                }
+                            ]
+                        }
+                    ]
+                }
+                """
+                
                 withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'SLACK_URL')]) {
                     sh """
                         curl -s -X POST -H 'Content-type: application/json' \
-                        --data '{"text":"SUCCESS: ${msg}"}' \
-                        "${SLACK_URL}"
+                        --data '${slackMessage}' \
+                        "\${SLACK_URL}"
                     """
                 }
             }
@@ -230,12 +507,65 @@ pipeline {
         failure {
             script {
                 def branch = env.BRANCH_NAME
-                def msg = "BUILD FAILED | Branch: ${branch} | Job: ${env.JOB_NAME} | Build: #${env.BUILD_NUMBER} | ${env.BUILD_URL}"
+                def buildUrl = env.BUILD_URL
+                def buildNumber = env.BUILD_NUMBER
+                def jobName = env.JOB_NAME
+                
+                def slackMessage = """
+                {
+                    "blocks": [
+                        {
+                            "type": "header",
+                            "text": {
+                                "type": "plain_text",
+                                "text": "❌ Build Failed",
+                                "emoji": true
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "fields": [
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Branch:*\\n${branch}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Build:*\\n#${buildNumber}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Job:*\\n${jobName}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "*Status:*\\n❌ Failed"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "actions",
+                            "elements": [
+                                {
+                                    "type": "button",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "View Console Output"
+                                    },
+                                    "url": "${buildUrl}console",
+                                    "style": "danger"
+                                }
+                            ]
+                        }
+                    ]
+                }
+                """
+                
                 withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'SLACK_URL')]) {
                     sh """
                         curl -s -X POST -H 'Content-type: application/json' \
-                        --data '{"text":"FAILED: ${msg}"}' \
-                        "${SLACK_URL}"
+                        --data '${slackMessage}' \
+                        "\${SLACK_URL}"
                     """
                 }
             }
