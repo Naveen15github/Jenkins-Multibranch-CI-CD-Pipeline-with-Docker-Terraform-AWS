@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    tools {
+        nodejs 'NodeJS-16'
+    }
 
     environment {
         DOCKER_IMAGE      = "naveen152005/myapp"
