@@ -23,6 +23,14 @@
       }
     }
   },
+  "jest-junit": {
+    "outputDirectory": "./coverage",
+    "outputName": "junit.xml",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
+  },
   "dependencies": {
     "express": "^4.18.2"
   },
