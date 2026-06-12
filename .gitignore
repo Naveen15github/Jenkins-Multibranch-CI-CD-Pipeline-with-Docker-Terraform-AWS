@@ -1,0 +1,12 @@
+node_modules/
+coverage/
+.env
+*.log
+npm-debug.log*
+.DS_Store
+dist/
+build/
+.sonar/
+.scannerwork/
+*.pem
+*.key

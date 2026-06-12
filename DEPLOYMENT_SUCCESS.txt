@@ -1,0 +1,343 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║          🎉 INFRASTRUCTURE DEPLOYED SUCCESSFULLY! 🎉           ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+Deployment completed in: 1 minute 15 seconds
+Resources created: 21 AWS resources
+Status: ALL SYSTEMS GO! ✅
+
+════════════════════════════════════════════════════════════════
+
+📊 YOUR AWS INFRASTRUCTURE:
+
+🚀 JENKINS CI/CD SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Instance ID:    i-07cbb13dd53c32341
+  Instance Type:  t3.medium (2 vCPU, 4 GB RAM)
+  
+  🌐 Jenkins URL:     http://54.174.211.72:8080
+  🔍 SonarQube URL:   http://54.174.211.72:9000
+  
+  📍 Public IP:       54.174.211.72
+  🔒 Private IP:      10.0.1.56
+  
+  🔑 SSH Command:
+     ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@54.174.211.72
+  
+  📦 Pre-installed:
+     ✓ Jenkins (port 8080)
+     ✓ SonarQube (port 9000 - Docker)
+     ✓ Docker & Docker Compose
+     ✓ Node.js 18
+     ✓ Git, AWS CLI
+     ✓ CloudWatch monitoring
+
+🧪 STAGING SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Instance ID:    i-0f2d9bc85ac433065
+  Instance Type:  t3.micro (2 vCPU, 1 GB RAM)
+  
+  🌐 App URL:         http://3.213.252.204:3000
+  
+  📍 Public IP:       3.213.252.204
+  🔒 Private IP:      10.0.1.75
+  
+  🔑 SSH Command:
+     ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@3.213.252.204
+
+🚢 PRODUCTION SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Instance ID:    i-0b1bee4c97b2bb76e
+  Instance Type:  t3.small (2 vCPU, 2 GB RAM)
+  
+  🌐 App URL:         http://34.194.214.144:3000
+  
+  📍 Public IP:       34.194.214.144
+  🔒 Private IP:      10.0.1.231
+  
+  🔑 SSH Command:
+     ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@34.194.214.144
+
+════════════════════════════════════════════════════════════════
+
+⚠️  IMPORTANT: WAIT 10 MINUTES FOR FULL SETUP
+
+The servers are now running, but Jenkins and SonarQube are still
+being installed automatically via user-data scripts.
+
+⏱️  Timeline:
+  ✅ Now (0 min):  Servers are running
+  ⏳ 5 minutes:   Jenkins is installing
+  ⏳ 8 minutes:   SonarQube is starting
+  ✅ 10 minutes:  Everything is ready!
+
+☕ Take a break! Check back in 10 minutes.
+
+════════════════════════════════════════════════════════════════
+
+🎯 NEXT STEPS (After 10 minutes):
+
+1️⃣  GET JENKINS INITIAL PASSWORD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Run this command:
+
+ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@54.174.211.72 "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+
+Or from PowerShell:
+ssh -i $env:USERPROFILE\.ssh\jenkins-cicd-key ec2-user@54.174.211.72 "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+
+Copy the password that appears.
+
+
+2️⃣  ACCESS JENKINS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open in browser:  http://54.174.211.72:8080
+
+  1. Paste the initial password
+  2. Click "Install suggested plugins" (wait 5 minutes)
+  3. Create admin user:
+     Username: admin
+     Password: (choose a strong password)
+     Email: your-email@example.com
+  4. Click "Save and Continue"
+  5. Click "Save and Finish"
+  6. Click "Start using Jenkins"
+
+
+3️⃣  INSTALL ADDITIONAL PLUGINS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Jenkins: Manage Jenkins → Plugins → Available Plugins
+
+Search and install:
+  ☐ Docker Pipeline
+  ☐ SonarQube Scanner
+  ☐ SSH Agent
+
+Click "Install" and restart when done.
+
+
+4️⃣  CONFIGURE JENKINS CREDENTIALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Manage Jenkins → Credentials → System → Global credentials
+
+Add these 4 credentials:
+
+A) Docker Hub Credentials
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Kind: Username with password
+   • ID: DOCKER_HUB_CREDENTIALS
+   • Username: naveen152005
+   • Password: naveen@123
+
+B) SSH Key for Deployments
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Kind: SSH Username with private key
+   • ID: SSH_KEY
+   • Username: ec2-user
+   • Private Key: Enter directly
+   
+   Get your private key:
+   type C:\Users\Naveen\.ssh\jenkins-cicd-key
+   
+   Copy EVERYTHING including:
+   -----BEGIN OPENSSH PRIVATE KEY-----
+   ...
+   -----END OPENSSH PRIVATE KEY-----
+
+C) Slack Webhook (Optional)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Kind: Secret text
+   • ID: SLACK_WEBHOOK
+   • Secret: Your Slack webhook URL
+   (Skip if you don't have Slack)
+
+D) SonarQube Token (We'll get this next)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Kind: Secret text
+   • ID: SONAR_TOKEN
+   • Secret: (from step 5 below)
+
+
+5️⃣  CONFIGURE SONARQUBE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open in browser:  http://54.174.211.72:9000
+
+  1. Login: admin / admin
+  2. Change password when prompted
+  3. Click "Create Project" → "Manually"
+  4. Project key: jenkins-cicd-pipeline
+  5. Display name: Jenkins CI/CD Pipeline
+  6. Click "Set Up" → "With Jenkins"
+  7. Generate Token → COPY THE TOKEN
+  8. Go back to Jenkins and add as SONAR_TOKEN credential
+
+Add Webhook in SonarQube:
+  • Administration → Configuration → Webhooks
+  • Name: Jenkins
+  • URL: http://localhost:8080/sonarqube-webhook/
+  • Create
+
+
+6️⃣  CONFIGURE SONARQUBE IN JENKINS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Manage Jenkins → System → SonarQube servers
+
+  ☑ Enable injection of SonarQube server configuration
+  • Name: SonarQube
+  • Server URL: http://localhost:9000
+  • Server authentication token: Select SONAR_TOKEN
+  • Save
+
+
+7️⃣  UPDATE JENKINSFILE WITH SERVER IPs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Edit: c:\Users\Naveen\Downloads\jenkins-cicd-pipeline\jenkins-cicd-pipeline\Jenkinsfile
+
+Find and update these lines:
+
+DOCKER_IMAGE      = "naveen152005/myapp"
+STAGING_SERVER_IP = "3.213.252.204"
+PROD_SERVER_IP    = "34.194.214.144"
+
+Save the file.
+
+Commit and push:
+git add Jenkinsfile
+git commit -m "Configure Jenkinsfile with AWS server IPs"
+git push origin main
+
+
+8️⃣  CREATE JENKINS PIPELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Jenkins:
+  1. New Item
+  2. Name: jenkins-cicd-pipeline
+  3. Type: Multibranch Pipeline
+  4. Click OK
+  5. Branch Sources → Add source → Git
+  6. Repository URL: (your Git repository URL)
+  7. Save
+
+Jenkins will automatically scan branches!
+
+
+9️⃣  TEST YOUR PIPELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Create dev branch:
+git checkout -b dev
+echo "// test" >> src/app.js
+git add .
+git commit -m "test: trigger dev pipeline"
+git push origin dev
+
+Create staging branch:
+git checkout -b staging
+git merge dev
+git push origin staging
+
+Deploy to production:
+git checkout main
+git merge staging
+git push origin main
+(Approve deployment in Jenkins UI)
+
+
+🔟 VERIFY DEPLOYMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Test staging:
+curl http://3.213.252.204:3000
+curl http://3.213.252.204:3000/health
+
+Test production:
+curl http://34.194.214.144:3000
+curl http://34.194.214.144:3000/health
+
+Expected response:
+{"message":"Hello from CI/CD Pipeline"}
+
+════════════════════════════════════════════════════════════════
+
+💰 MONTHLY COST: ~$77/month
+
+Resources in use:
+  • 3 EC2 Instances: $52/month
+  • 3 Elastic IPs: $11/month
+  • EBS Storage: $7/month
+  • Other: $7/month
+
+════════════════════════════════════════════════════════════════
+
+🔧 USEFUL COMMANDS:
+
+# SSH to Jenkins server
+ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@54.174.211.72
+
+# Check Jenkins status
+ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@54.174.211.72 "sudo systemctl status jenkins"
+
+# Check SonarQube
+ssh -i C:\Users\Naveen\.ssh\jenkins-cicd-key ec2-user@54.174.211.72 "docker ps | grep sonarqube"
+
+# View Terraform outputs again
+cd terraform
+terraform output
+
+# Destroy everything when done
+cd terraform
+terraform destroy
+
+════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+  • READY_TO_DEPLOY.txt - Deployment instructions
+  • SETUP_STATUS.md - Setup tracking
+  • terraform/README.md - Complete guide
+  • terraform/QUICKSTART.md - Quick start guide
+  • terraform/ARCHITECTURE.md - Technical architecture
+  • infrastructure-outputs.json - All outputs
+
+════════════════════════════════════════════════════════════════
+
+✅ DEPLOYMENT SUMMARY:
+
+  [✓] 1 VPC with networking
+  [✓] 3 EC2 Instances created
+  [✓] 3 Elastic IPs assigned
+  [✓] 3 Security Groups configured
+  [✓] IAM Roles and Policies set
+  [✓] CloudWatch Logging enabled
+  [✓] SSH Key deployed
+  [✓] User-data scripts running
+  [⏳] Jenkins installing (wait 10 min)
+  [⏳] SonarQube starting (wait 10 min)
+
+════════════════════════════════════════════════════════════════
+
+🎉 CONGRATULATIONS!
+
+You now have a complete CI/CD infrastructure running on AWS!
+
+Next: Wait 10 minutes, then follow steps 1-10 above.
+
+════════════════════════════════════════════════════════════════
+
+Deployment Date: June 12, 2026
+Deployed By: Naveen
+AWS Account: 478468758108
+Region: us-east-1
+Total Time: 1 minute 15 seconds
+
+🚀 HAPPY DEPLOYING!
