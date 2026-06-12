@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline Dashboard | Automated Deployment System</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <span class="logo">⚡</span>
+                    <span class="brand-name">CI/CD Pipeline</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#pipeline">Pipeline</a>
+                    <a href="#status">Status</a>
+                    <a href="#docs">Docs</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Production Ready</span>
+                </div>
+                <h1 class="hero-title">
+                    Automated <span class="gradient-text">CI/CD Pipeline</span>
+                    <br>for Modern Development
+                </h1>
+                <p class="hero-subtitle">
+                    Automatically test, build, and deploy your applications with enterprise-grade
+                    continuous integration and deployment. From commit to production in minutes.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/health" class="btn btn-primary">
+                        <span>View Status</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="/api/users" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 5V15M5 10H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>API Docs</span>
+                    </a>
+                </div>
+
+                <!-- Live Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            ✓
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="test-coverage">100%</div>
+                            <div class="stat-label">Test Coverage</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            ⚡
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="deploy-time">~5min</div>
+                            <div class="stat-label">Deploy Time</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            🚀
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="uptime">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            ✨
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="quality-gate">Passed</div>
+                            <div class="stat-label">Quality Gate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pipeline Flow Section -->
+    <section id="pipeline" class="section pipeline-section">
+        <div class="container">
+            <h2 class="section-title">Pipeline Flow</h2>
+            <p class="section-subtitle">Automated workflow from code commit to production deployment</p>
+
+            <div class="pipeline-flow">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Code Commit</h3>
+                    <p>Push code to GitHub repository</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🧪</div>
+                    <h3>Automated Tests</h3>
+                    <p>Run 12 unit tests with 100% coverage</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🔍</div>
+                    <h3>Quality Check</h3>
+                    <p>SonarQube code quality analysis</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🐳</div>
+                    <h3>Docker Build</h3>
+                    <p>Build and push container image</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">🚀</div>
+                    <h3>Deploy</h3>
+                    <p>Automated deployment to servers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features-section">
+        <div class="container">
+            <h2 class="section-title">Enterprise Features</h2>
+            <p class="section-subtitle">Built with industry-standard tools and best practices</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Continuous Integration</h3>
+                    <p>Automatic testing and validation on every commit with Jenkins multibranch pipeline</p>
+                    <div class="feature-tech">Jenkins • GitHub</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🐳</div>
+                    <h3>Containerization</h3>
+                    <p>Docker-based deployments ensuring consistency across all environments</p>
+                    <div class="feature-tech">Docker • Docker Hub</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Code Quality</h3>
+                    <p>Automated code analysis with quality gates to maintain high standards</p>
+                    <div class="feature-tech">SonarQube • ESLint</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud Infrastructure</h3>
+                    <p>Fully automated AWS infrastructure provisioning with Terraform</p>
+                    <div class="feature-tech">AWS • Terraform</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Smart Notifications</h3>
+                    <p>Real-time Slack notifications with interactive buttons for quick actions</p>
+                    <div class="feature-tech">Slack • Webhooks</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Security First</h3>
+                    <p>Secure credential management and isolated deployment environments</p>
+                    <div class="feature-tech">AWS IAM • Secrets</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Environment Status Section -->
+    <section id="status" class="section status-section">
+        <div class="container">
+            <h2 class="section-title">Environment Status</h2>
+            <p class="section-subtitle">Real-time status of all deployment environments</p>
+
+            <div class="env-grid">
+                <div class="env-card env-dev">
+                    <div class="env-header">
+                        <div>
+                            <h3>Development</h3>
+                            <p>Testing & Experimentation</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="env-info">
+                        <div class="info-item">
+                            <span class="info-label">Branch:</span>
+                            <span class="info-value">dev</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Last Deploy:</span>
+                            <span class="info-value">Auto on commit</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Pipeline:</span>
+                            <span class="info-value">Tests only</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="env-card env-staging">
+                    <div class="env-header">
+                        <div>
+                            <h3>Staging</h3>
+                            <p>Pre-production Testing</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="env-info">
+                        <div class="info-item">
+                            <span class="info-label">Branch:</span>
+                            <span class="info-value">staging</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">URL:</span>
+                            <a href="http://3.213.252.204:3000" class="info-link" target="_blank">View App →</a>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Pipeline:</span>
+                            <span class="info-value">Full + Auto Deploy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="env-card env-production">
+                    <div class="env-header">
+                        <div>
+                            <h3>Production</h3>
+                            <p>Live Environment</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="env-info">
+                        <div class="info-item">
+                            <span class="info-label">Branch:</span>
+                            <span class="info-value">main</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">URL:</span>
+                            <a href="http://34.194.214.144:3000" class="info-link" target="_blank">View App →</a>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Pipeline:</span>
+                            <span class="info-value">Full + Manual Approval</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="section tech-section">
+        <div class="container">
+            <h2 class="section-title">Technology Stack</h2>
+            <p class="section-subtitle">Built with modern, industry-standard technologies</p>
+
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3>CI/CD</h3>
+                    <div class="tech-items">
+                        <span class="tech-badge">Jenkins</span>
+                        <span class="tech-badge">GitHub</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Infrastructure</h3>
+                    <div class="tech-items">
+                        <span class="tech-badge">AWS EC2</span>
+                        <span class="tech-badge">Terraform</span>
+                        <span class="tech-badge">VPC</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Code Quality</h3>
+                    <div class="tech-items">
+                        <span class="tech-badge">SonarQube</span>
+                        <span class="tech-badge">Jest</span>
+                        <span class="tech-badge">ESLint</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Backend</h3>
+                    <div class="tech-items">
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Express</span>
+                        <span class="tech-badge">REST API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">⚡</span>
+                    <span class="brand-name">CI/CD Pipeline</span>
+                </div>
+                <div class="footer-links">
+                    <a href="http://54.174.211.72:8080" target="_blank">Jenkins Dashboard</a>
+                    <a href="http://54.174.211.72:9000" target="_blank">SonarQube</a>
+                    <a href="https://github.com/Naveen15github/jenkins-cicd-pipeline" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built with ❤️ using modern DevOps practices</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
