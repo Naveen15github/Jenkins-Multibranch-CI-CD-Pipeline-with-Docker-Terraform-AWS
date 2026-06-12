@@ -9,8 +9,8 @@ pipeline {
         DOCKER_IMAGE      = "naveen152005/myapp"
         SONAR_PROJECT_KEY = "jenkins-cicd-pipeline"
         SONAR_HOST_URL    = "http://localhost:9000"
-        STAGING_SERVER_IP = "3.213.252.204"
-        PROD_SERVER_IP    = "34.194.214.144"
+        STAGING_SERVER_IP = "10.0.1.75"      // Private IP - same VPC
+        PROD_SERVER_IP    = "10.0.1.231"     // Private IP - same VPC
         DEPLOY_USER       = "ec2-user"
         APP_PORT          = "3000"
         CONTAINER_NAME    = "cicd-app"
