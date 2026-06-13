@@ -545,17 +545,6 @@ Time:        2.4s
 
 ---
 
-## 🚀 Live Demo
-
-| Environment | URL | Branch |
-|---|---|---|
-| Staging | http://3.213.252.204:3000 | `staging` |
-| Production | http://34.194.214.144:3000 | `main` |
-
-> **Note:** EC2 instances may be stopped to avoid AWS costs after the project demo. The architecture, pipeline logic, and all configurations remain fully implemented and documented here.
-
----
-
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
