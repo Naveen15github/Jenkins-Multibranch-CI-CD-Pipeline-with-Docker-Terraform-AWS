@@ -9,7 +9,7 @@
 [![AWS](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws)](https://aws.amazon.com/)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-purple?logo=terraform)](https://www.terraform.io/)
 [![Node.js](https://img.shields.io/badge/Node.js-16.20.2-green?logo=node.js)](https://nodejs.org/)
-[![SonarQube](https://img.shields.io/badge/SonarQube-Quality_Gate-green?logo=sonarqube)](https://www.sonarqube.org/)
+[![SonarQube](https://img.shields.io/badge/SonarQube-Quality_Gate-green?logo=sonarqube)](https://www.sonarqube.org/) 
 [![Coverage](https://img.shields.io/badge/Coverage-97%25-brightgreen)](https://jestjs.io/)
 [![Tests](https://img.shields.io/badge/Tests-12_Passing-success)](https://jestjs.io/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
@@ -42,7 +42,7 @@
 ## 🧭 Overview
 
 I built this project to demonstrate a complete, production-grade DevOps pipeline from scratch. The system automatically tests, builds, containerizes, and deploys a Node.js/Express application across three environments (development, staging, production) using a Jenkins Multibranch Pipeline strategy. Every commit to a branch triggers the full pipeline — including unit tests, SonarQube static analysis, Docker image build and push to Docker Hub, and automated deployment to AWS EC2 — with Slack notifications at every stage.
-
+ 
 **Key Highlights:**
 - **3 branches** → 3 environments (dev, staging, main/production)
 - **Fully automated** from code commit to live deployment in ~5 minutes
