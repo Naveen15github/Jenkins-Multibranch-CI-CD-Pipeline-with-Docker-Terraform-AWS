@@ -1,7 +1,7 @@
 ![Enterprise Jenkins Multibranch CI/CD Pipeline Architecture](architecture%20diagram.png)
 
 ---
-
+ 
 # 🚀 Jenkins Multibranch CI/CD Pipeline with Docker, Terraform & AWS
 
 [![Jenkins](https://img.shields.io/badge/Jenkins-Multibranch-red?logo=jenkins)](https://www.jenkins.io/)
