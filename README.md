@@ -14,7 +14,7 @@
 [![Tests](https://img.shields.io/badge/Tests-12_Passing-success)](https://jestjs.io/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-> **Enterprise-grade automated CI/CD pipeline** featuring Jenkins multibranch strategy, Docker containerization, AWS EC2 infrastructure provisioned with Terraform, SonarQube quality gates, Jest test coverage, and real-time Slack notifications for multi-environment Node.js deployment — fully built and implemented by me.
+> **Enterprise-grade automated CI/CD pipeline** featuring Jenkins multibranch strategy, Docker containerization, AWS EC2 infrastructure provisioned with Terraform, SonarQube quality gates, Jest test coverage, and real-time Slack notifications for multi-environment Node.js deployment — fully built and implemented by me. 
 
 ---
 
